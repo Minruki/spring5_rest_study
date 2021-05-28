@@ -7,7 +7,7 @@
 		<result column="regdate" property="registerDateTime"/>
 	</resultMap>
 	
-	<select id="selectMemberAll" resultMap="resMember">
+	<select id="selectMemberByAll" resultMap="resMember">
 		SELECT id, email, password, name, regdate
 		  FROM member
 	</select>

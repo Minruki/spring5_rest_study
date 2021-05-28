@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({ContextDataSource.class, ContextSqlSession.class})
-@ComponentScan(basePackages = {})
+@ComponentScan(basePackages = {
+		  "spring5_rest_study.mappers",
+		  "spring5_rest_study.service",
+})
 public class ContextRoot {
 
 }
