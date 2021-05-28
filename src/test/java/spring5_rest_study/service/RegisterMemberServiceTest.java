@@ -1,7 +1,5 @@
 package spring5_rest_study.service;
 
-import java.util.List;
-
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.junit.Assert;
@@ -16,25 +14,31 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import spring5_rest_study.config.ContextRoot;
 import spring5_rest_study.dto.Member;
-import spring5_rest_study.service.MemberListService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ContextRoot.class })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @WebAppConfiguration
-public class MemberListServiceTest {
-	protected static final Log log = LogFactory.getLog(MemberListServiceTest.class);
+public class RegisterMemberServiceTest {
+	protected static final Log log = LogFactory.getLog(RegisterMemberServiceTest.class);
 
 	@Autowired
-	private MemberListService service;
+	private RegisterMemberService service;
+	
+	@Autowired
+	private RemoveMemberService remService;
 	
 	@Test
-	public void testGetLists() {
+	public void testRegisterMember() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		List<Member> list = service.getLists();
-		Assert.assertNotNull(list);
+		Member member = new Member("test12345@test.co.kr", "1111", "test100");
 		
-		list.forEach(s->log.debug(s.toString()));
+		int res = service.registerMember(member);
+		Assert.assertEquals(1, res);
+		
+		log.debug("res > " + res);
+		
+		remService.removeMember(member.getId());
 	}
 
 }
